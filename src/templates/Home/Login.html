@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://127.0.0.1:8000/static/CSS/Login.css">
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li><a href="http://127.0.0.1:8000/">Home</a></li>
+        <li><a href="http://127.0.0.1:8000/Challenges.html">Challenges</a></li>
+        <li><a href="http://127.0.0.1:8000/tutorials.html">Watch our tutorials!</a></li>
+    </ul>
+</nav>
+
+<div class="login-form">
+    <h1>Login</h1>
+    <form id="loginForm"method="POST">
+        <div class="mb-3">
+            <label for="identifier"></label>
+            <input type="text" id="identifier" name="identifier" placeholder="email/username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password"></label>
+            <input type="password" id="password" name="password" placeholder="password" required>
+        </div>
+
+        <div class="register-link">
+            <p>Don't have an account? <a href="http://127.0.0.1:8000/signup.html">Register Today!</a></p>
+        </div>
+        <button id="submitBtn"class="btn btn-primary" type="submit" >Submit</button>
+    </form>
+</div>
+<script src="http://127.0.0.1:8000/static/javascript/Login.js"></script>
+</body>

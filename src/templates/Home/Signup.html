@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://127.0.0.1:8000/static/CSS/Signup.css">
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li><a href="http://127.0.0.1:8000/">Home</a></li>
+        <li><a href="http://127.0.0.1:8000/Challenges.html">Challenges</a></li>
+        <li><a href="http://127.0.0.1:8000/tutorials.html">Watch our tutorials!</a></li>
+    </ul>
+</nav>
+
+<div class="wrapper">
+    <h1>Signup</h1>
+    <form id="signupForm" method="POST">
+        <div class="mb-3">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="password_confirm">Confirm Password</label>
+            <input type="password" id="password_confirm" name="password_confirm">
+        </div>
+        <div class="register-link">
+            <p>Have an account? <a href="http://127.0.0.1:8000/login.html">Log in!</a> </p>
+        </div>
+        <button id="submitBtn" class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+<script src="http://127.0.0.1:8000/static/JavaScript/Home/Signup.js"></script>
+</body>

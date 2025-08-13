@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+body {
+    background-color: #181818;
+    min-height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.navbar ul{
+    width: 510px;
+    list-style-type: none;
+    background-color: #121212;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.navbar ul:hover{
+    border-radius: 10px;
+}
+
+body .Challenge {
+    color: white;
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    justify-content: center;
+    float: left;
+}
+
+.navbar a:hover{
+    background-color: #15292B;
+    padding: 15px;
+}
+
+.navbar li{
+/float: left ;
+}
+
+.navbar_challenges {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.navbar_challenges ul{
+    width: 360px;
+    list-style-type: none;
+    background-color: #121212;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.navbar_challenges ul:hover{
+    border-radius: 10px;
+}
+
+.navbar_challenges a{
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    justify-content: center;
+}
+
+.navbar_challenges a:hover{
+    background-color: #15292B;
+    padding: 15px;
+}
+
+.navbar_challenges li{
+    float: left;
+}
+
+.challenge_bar ul{
+    width: 140px;
+    list-style-type: none;
+    background-color: #121212;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.challenge_bar ul:hover{
+    border-radius: 10px;
+}
+
+.challenge_bar:hover{
+    border-radius: 10px;
+}
+
+.challenge_bar a{
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    justify-content: center;
+}
+
+.challenge_bar a:hover{
+    background-color: #15292B;
+    padding: 15px;
+}
+
+.challenge h1{
+    text-align: center;
+    color: white;
+}
