@@ -16,7 +16,7 @@
 
 <div class="login-form">
     <h1>Login</h1>
-    <form id="loginForm"method="POST">
+    <form id="loginForm" method="POST" action="#">
         <div class="mb-3">
             <label for="identifier"></label>
             <input type="text" id="identifier" name="identifier" placeholder="email/username" required>
@@ -26,11 +26,13 @@
             <input type="password" id="password" name="password" placeholder="password" required>
         </div>
 
+        <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+
         <div class="register-link">
             <p>Don't have an account? <a href="http://127.0.0.1:8000/signup.html">Register Today!</a></p>
         </div>
-        <button id="submitBtn"class="btn btn-primary" type="submit" >Submit</button>
+        <button id="submitBtn" class="btn btn-primary" type="submit" >Submit</button>
     </form>
 </div>
-<script src="http://127.0.0.1:8000/static/javascript/Login.js"></script>
+<script src="http://127.0.0.1:8000/static/JavaScript/Home/Login.js"></script>
 </body>

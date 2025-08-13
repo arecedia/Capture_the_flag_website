@@ -3,6 +3,12 @@ import uuid
 from operator import index
 from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def hash_password(password):
+    return pwd_context.hash(password)
 
 '''
 Main Database Model
@@ -11,7 +17,7 @@ class User(SQLModel, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     username: str = Field(index=True, unique=True)
     email: str = Field(unique=True, index=True)
-    password_hash: str
+    password: str
     created_at: datetime = Field(default_factory=datetime.utcnow)
     last_login: Optional[datetime] = None
 
@@ -26,6 +32,18 @@ class User(SQLModel, table=True):
     country: Optional[str] = None
 
     solved_challenges: List["ChallengeSolve"] = Relationship(back_populates="user")
+
+    def verify_password(self, password):
+        if password is None :
+            return False
+        return pwd_context.verify(password, self.password)
+
+    def update_password(self, password):
+        if password is None:
+            return False
+        elif password != "":
+            new_password = hash_password(password)
+            self.password = new_password
 
 '''
 Public User Model

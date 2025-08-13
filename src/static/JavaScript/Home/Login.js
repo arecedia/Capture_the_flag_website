@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Use fetch API to submit the form data asynchronously
-        fetch("/login.html", {
+        fetch("/api/login", {
             method: "POST", // Submit through post request
             headers: {
                 "Content-Type": "application/json" // Tells the server that we are submitting JSON data
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Handle errors
                 console.error("Error:", error);
                 feedbackMessage.textContent = "An error occurred. Please try again.";
-                feedbackmessage.style.color = "red";
+                feedbackMessage.style.color = "red";
             })
             .finally(() => {
                 submitBtn.disabled = false;

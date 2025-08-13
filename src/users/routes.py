@@ -18,7 +18,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordRequestForm
 
 log = logging.getLogger(__name__)
-router = APIRouter(prefix="/api", tags=["API"])
+router = APIRouter()
 templates = Jinja2Templates(directory="src/templates")
 
 @router.get("/current_user")
@@ -27,7 +27,7 @@ async def get_current_user(
 ):
     return(user)
 
-@router.post("/login.html", response_class=JSONResponse)
+@router.post("/api/login", response_class=JSONResponse)
 async def login_code(
         *,
         request: Request,
@@ -63,7 +63,7 @@ async def login_code(
     return response
 
 
-@router.post("/api/signup", response_class=JSONResponse)
+@router.post("/signup", response_class=JSONResponse)
 async def signup_code(
     *,
     request: Request,

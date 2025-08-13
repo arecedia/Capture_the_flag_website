@@ -25,7 +25,9 @@ def create_app():
     from src.auth import routes as auth_routes
     from src.users import view_routes
 
-    app.include_router(user_routes.router, prefix="", tags=["users"])
+    app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
+    app.include_router(user_routes.router, prefix="/api", tags=["users"])
     app.include_router(auth_routes.router, prefix="/api/auth", tags=["auth"])
     app.include_router(view_routes.router, prefix="", tags=["routes"])
 
