@@ -24,12 +24,14 @@ def create_app():
     from src.users import routes as user_routes
     from src.auth import routes as auth_routes
     from src.users import view_routes
+    from src.users import admin_routes
 
     app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
     app.include_router(user_routes.router, prefix="/api", tags=["users"])
     app.include_router(auth_routes.router, prefix="/api/auth", tags=["auth"])
     app.include_router(view_routes.router, prefix="", tags=["routes"])
+    app.include_router(admin_routes.router, prefix="/api/admin", tags=["admin"])
 
     if os.getenv("ENV") != "TEST":
         static_dir = "src/static"

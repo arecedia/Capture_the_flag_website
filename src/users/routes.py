@@ -1,4 +1,6 @@
 import logging
+from urllib.error import HTTPError
+
 import jwt
 from sqlmodel import Session, select
 from typing import Annotated, Optional
@@ -12,7 +14,7 @@ from src.users import models
 from src.auth import service as auth_service
 from src.auth import routes as auth_routes
 
-from fastapi import APIRouter, Depends, Request, Form
+from fastapi import APIRouter, Depends, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordRequestForm
@@ -27,7 +29,7 @@ async def get_current_user(
 ):
     return(user)
 
-@router.post("/api/login", response_class=JSONResponse)
+@router.post("/login", response_class=JSONResponse)
 async def login_code(
         *,
         request: Request,
@@ -64,10 +66,9 @@ async def login_code(
 
 
 @router.post("/signup", response_class=JSONResponse)
-async def signup_code(
-    *,
-    request: Request,
-    session: Session = Depends(database.get_session),
+async def signup_code(*,
+                      request: Request,
+                      session: Session = Depends(database.get_session),
 ):
     body = await request.json()
     email = body.get("email")
@@ -115,7 +116,7 @@ async def signup_code(
         status_code=201
     )
 
-@router.get("/api/users", response_model=list[models.PublicUser])
+@router.get("/users", response_model=list[models.PublicUser])
 async def get_users(session: Session = Depends(database.get_session)):
     qry = select(models.User)
     result = session.exec(qry).all()
@@ -130,7 +131,7 @@ async def get_auth_user(
     """
     return {"current_user": user}
 
-@router.get("/api/reviews")
+@router.get("/reviews")
 async def display_reviews(
         session: Session = Depends(database.get_session)
 ):
@@ -140,3 +141,44 @@ async def display_reviews(
     qry = select(models.Review)
     result = session.exec(qry).all()
     return result
+
+@router.post("/Challenge")
+async def submit_flag(*,
+                      session: Session = Depends(database.get_session),
+                      request:Request,
+                      current_user: models.User = Depends(auth_service.get_auth_user)
+                      ):
+    body = await request.json()
+    flag = body.get("flag")
+
+    if not flag:
+        return HTTPException(status_code=400, detail="Flag not found")
+
+    challenge = session.exec(
+        select(models.Challenge).where(models.Challenge.flag == flag)).first()
+
+    if not challenge:
+        return HTTPException(status_code=400, details="Invalid flag")
+
+    existing_solve = session.exec(
+        select(models.ChallengeSolve)
+        .where(models.ChallengeSolve.user_id == current_user.id)
+        .where(models.ChallengeSolve.challenge_id == challenge.id)
+    ).first()
+
+    if existing_solve:
+        return {"success": False, "message": "You have already solved this challenge"}
+
+    new_solve = models.ChallengeSolve(
+        user_id=current_user.id,
+        challenge_id=challenge.id,
+        solved_at=datetime.utcnow(),
+    )
+    session.add(new_solve)
+
+    current_user.score += challenge.points
+    session.add(current_user)
+
+    session.commit()
+    session.refresh(current_user)
+

@@ -9,6 +9,7 @@ from typing import Annotated, Optional, Dict
 from passlib.context import CryptContext
 
 from src.users import models
+from src.users.models import User
 from src import database
 
 import jwt
@@ -257,3 +258,11 @@ def authenticate_user(database, username: str, password: str):
     if not verify_password(password, user.hashed_password):
         return False
     return user
+
+def get_current_admin(current_user: User = Depends(get_auth_user)) -> User:
+    if not current_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin privileges required."
+        )
+    return current_user
