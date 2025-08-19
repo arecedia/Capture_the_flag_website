@@ -6,40 +6,43 @@
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
-<nav class="navbar_challenges">
-    <ul>
-        <li><a href="/Index/">Home</a></li>
-        <li><a href="/Tutorials/">Tutorials</a></li>
-        <li><a href="/Challenges/">Challenges</a></li>
-        <li><a href="/Tutorials/2">Stuck?</a></li>
-        <li><a href="/Review-Submission/2">Want to leave a review?</a></li>
-        <li><a href="/Reviews/">Want to see reviews?</a></li>
-    </ul>
-</nav>
-
-<div class="challenge">
-    <h1>Challenge 3: SUID configuration</h1>
-
-    <nav class="challenge_bar">
+    <nav class="navbar_challenges">
         <ul>
-            <li><a href="/challenge/1">Challenge 1</a></li>
-            <li><a href="/challenge/2">Challenge 2</a></li>
-            <li><a href="/challenge/3">Challenge 3</a></li>
-            <li><a href="/challenge/4">Challenge 4</a></li>
-            <li><a href="/challenge/5">Challenge 5</a></li>
+            <li><a href="/Index/">Home</a></li>
+            <li><a href="/Tutorials/">Tutorials</a></li>
+            <li><a href="/Challenges/">Challenges</a></li>
+            <li><a href="/Tutorials/3">Stuck?</a></li>
+            <li><a href="/Review-Submission/3">Want to leave a review?</a></li>
+            <li><a href="/Reviews/">Want to see reviews?</a></li>
         </ul>
     </nav>
 
-    <form id="challengeForm">
-        <form method="POST">
-            <div class="input_flag">
-                <label for="flag_3"></label>
-                <input type="text" id="flag_3" name="flag_3" placeholder="Input flag found">
+    <div class="title">
+        <h1>Challenge 3: SUID Configuration</h1>
+    </div>
+
+    <div class="main-content">
+        <nav class="sidebar">
+            <h2>Challenges</h2>
+            <a href="/challenge/1">Challenge 1</a>
+            <a href="/challenge/2">Challenge 2</a>
+            <a href="/challenge/3">Challenge 3</a>
+            <a href="/challenge/4">Challenge 4</a>
+            <a href="/challenge/5">Challenge 5</a>
+        </nav>
+        <div class="page-content">
+            <div class="workspace-box">
+                <form class="challenge-form" id="challengeForm" method="post">
+                    <div class="input_flag">
+                        <label for="flag_3"></label>
+                        <input type="text" id="flag_3" name="flag_3" placeholder="Input flag found" required autocomplete="off">
+                    </div>
+                    <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="submit_flag()">Submit</button>
-        </form>
-    </form>
-</div>
-<script src=http://127.0.0.1:8000/static/JavaScript/Challenges/Challenge_3.js></script>
+        </div>
+    </div>
+<script src="http://127.0.0.1:8000/static/JavaScript/Challenges/Challenge_3.js"></script>
 </body>
 </html>

@@ -17,6 +17,10 @@
         </ul>
     </nav>
 
+    <div class="title">
+        <h1>Challenge 1: Permission Configuration</h1>
+    </div>
+
     <div class="main-content">
         <div class="page-wrapper">
             <nav class="sidebar" id="sidebar">
@@ -29,15 +33,16 @@
             </nav>
 
             <div class="page-content">
-                <h1>Challenge 1: Permission Configuration</h1>
-                <form id="challengeForm" method="POST">
-                    <div class="input_flag">
-                        <label for="flag_1"></label>
-                        <input type="text" id="flag_1" name="flag_1" placeholder="Input flag found" required autocomplete="off">
-                    </div>
-                    <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
-                    <button id="submitBtn" class="btn btn-primary" type="submit">Submit</button>
-                </form>
+                <div class="workspace-box">
+                    <form class="challenge-form" id="challengeForm" method="POST">
+                        <div class="input_flag">
+                            <label for="flag_1"></label>
+                            <input type="text" id="flag_1" name="flag_1" placeholder="Input flag found" required autocomplete="off">
+                        </div>
+                        <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+                        <button id="submitBtn" class="btn btn-primary" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
