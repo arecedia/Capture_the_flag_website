@@ -56,30 +56,6 @@ async def user_view(*,
         context={"users": users}
     )
 
-@router.get("/login.html", response_class=HTMLResponse)
-async def login_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Home/Login.html",
-        context = {}
-    )
-
-@router.get("/signup.html", response_class=HTMLResponse)
-async def signup_view(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="Home/Signup.html",
-        context={}
-    )
-
-@router.get("/Challenges.html", response_class=HTMLResponse)
-async def challenges_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Home/Challenges.html",
-        context = {}
-    )
-
 @router.get("/challenge/1", response_class=HTMLResponse)
 async def challenge_1_view(request: Request):
     return templates.TemplateResponse("Challenges/Challenge_1.html", {"request": request})
@@ -102,14 +78,6 @@ async def challenge_4_view(request: Request):
 @router.get("/challenge/5", response_class=HTMLResponse)
 async def challenge_5_view(request: Request):
     return templates.TemplateResponse("Challenges/Challenge_5.html", {"request": request})
-
-@router.get("/tutorials.html", response_class=HTMLResponse)
-async def tutorial_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Home/Tutorials.html",
-        context = {}
-    )
 
 @router.get("/tutorial/1", response_class=HTMLResponse)
 async def tutorial_1_view(request: Request):
@@ -155,7 +123,7 @@ async def tutorial_5_view(request: Request):
         context = {}
     )
 
-@router.get("/Reviews.html", response_class=HTMLResponse)
+@router.get("/Reviews/", response_class=HTMLResponse)
 async def reviews_view(request: Request):
     return templates.TemplateResponse(
         request=request,
@@ -163,7 +131,7 @@ async def reviews_view(request: Request):
         context={}
     )
 
-@router.get("/Challenges/Review_1.html", response_class=HTMLResponse)
+@router.get("/Review-Submission/1", response_class=HTMLResponse)
 async def review_submission_1_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -171,7 +139,7 @@ async def review_submission_1_view(request: Request):
         context = {}
     )
 
-@router.get("/Challenges/Review_2.html", response_class=HTMLResponse)
+@router.get("/Review-Submission/2", response_class=HTMLResponse)
 async def review_submission_2_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -179,7 +147,7 @@ async def review_submission_2_view(request: Request):
         context = {}
     )
 
-@router.get("/Challenges/Review_3.html", response_class=HTMLResponse)
+@router.get("/Review-Submission/3", response_class=HTMLResponse)
 async def review_submission_3_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -187,7 +155,7 @@ async def review_submission_3_view(request: Request):
         context = {}
     )
 
-@router.get("/Challenges/Review_4.html", response_class=HTMLResponse)
+@router.get("/Review-Submission/4", response_class=HTMLResponse)
 async def review_submission_4_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -195,7 +163,7 @@ async def review_submission_4_view(request: Request):
         context = {}
     )
 
-@router.get("/Challenges/Review_5.html", response_class=HTMLResponse)
+@router.get("/Review-Submission/5", response_class=HTMLResponse)
 async def review_submission_5_view(request: Request):
     return templates.TemplateResponse(
         request = request,

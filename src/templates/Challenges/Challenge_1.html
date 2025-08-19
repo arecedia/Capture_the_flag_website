@@ -3,42 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="http://127.0.0.1:8000/static/CSS/Challenges.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
-<nav class="navbar_challenges">
-    <ul>
-        <li><a href="http://127.0.0.1:8000/">Home</a></li>
-        <li><a href="http://127.0.0.1:8000/tutorials.html">Tutorials</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenges.html">Challenges</a></li>
-        <li><a href="http://127.0.0.1:8000/Tutorial_1.html">Stuck?</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenges/Review_1.html">Want to leave a review?</a></li>
-        <li><a href="http://127.0.0.1:8000/Reviews.html">Want to see reviews?</a></li>
-    </ul>
-</nav>
+    <nav class="navbar_challenges" id="navbar">
+        <ul>
+            <li><a href="/Index/">Home</a></li>
+            <li><a href="/Tutorials/">Tutorials</a></li>
+            <li><a href="/Challenges/">Challenges</a></li>
+            <li><a href="/Tutorials/1">Stuck?</a></li>
+            <li><a href="/Review-Submission/1">Want to leave a review?</a></li>
+            <li><a href="/Reviews/">Want to see reviews?</a></li>
+        </ul>
+    </nav>
 
-<div class="challenge">
-    <h1>Challenge 1: Permission Configuration</h1>
-</div>
-<nav class="challenge_bar">
-    <ul>
-        <li><a href="http://127.0.0.1:8000/Challenge_1.html">Challenge 1</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_2.html">Challenge 2</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_3.html">Challenge 3</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_4.html">Challenge 4</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_5.html">Challenge 5</a></li>
-    </ul>
-</nav>
-<form id="challengeForm">
-    <form method="POST">
-        <div class="input_flag">
-            <label for="flag_1"></label>
-            <input type="text" id="flag_1" name="flag_1" placeholder="Input flag found" required autocomplete="off">
+    <div class="main-content">
+        <div class="page-wrapper">
+            <nav class="sidebar" id="sidebar">
+                <h2>Challenges</h2>
+                <a href="/challenge/1">Challenge 1</a>
+                <a href="/challenge/2">Challenge 2</a>
+                <a href="/challenge/3">Challenge 3</a>
+                <a href="/challenge/4">Challenge 4</a>
+                <a href="/challenge/5">Challenge 5</a>
+            </nav>
+
+            <div class="page-content">
+                <h1>Challenge 1: Permission Configuration</h1>
+                <form id="challengeForm" method="POST">
+                    <div class="input_flag">
+                        <label for="flag_1"></label>
+                        <input type="text" id="flag_1" name="flag_1" placeholder="Input flag found" required autocomplete="off">
+                    </div>
+                    <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+                    <button id="submitBtn" class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
-        <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
-        <button id="submitBtn"class="btn btn-primary" type="submit">Submit</button>
-    </form>
-</form>
-<script src="http://127.0.0.1:8000/static/JavaScript/Challenges/Challenge_1.js"></script>
+    </div>
+    <script src="http://127.0.0.1:8000/static/JavaScript/Challenges/Challenge_1.js"></script>
 </body>
 </html>

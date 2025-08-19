@@ -15,13 +15,19 @@ body {
 }
 
 /* Navbar */
-.navbar, .navbar_challenges, .navbar_tutorials, .navbar_reviews {
+.navbar,
+.navbar_challenges,
+.navbar_tutorials,
+.navbar_reviews {
     display: flex;
     justify-content: center;
     position: relative
 }
 
-.navbar ul, .navbar_challenges ul, .navbar_tutorials ul, .navbar_reviews ul {
+.navbar ul,
+.navbar_challenges ul,
+.navbar_tutorials ul,
+.navbar_reviews ul {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +39,10 @@ body {
     overflow: hidden;
 }
 
-.navbar a {
+.navbar a,
+.navbar_challenges a,
+.navbar_tutorials a,
+.navbar_reviews a {
     display: block;
     color: white;
     text-decoration: none;
@@ -41,7 +50,10 @@ body {
     white-space: nowrap;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar_challenges a:hover,
+.navbar_tutorials a:hover,
+.navbar_reviews a:hover {
     background-color: #15292B;
 }
 
@@ -139,6 +151,56 @@ body {
     text-decoration: underline;
 }
 
+.sidebar {
+    display: flex;
+    flex-direction: column;       /* Stack links vertically */
+    align-items: stretch;         /* Links fill the width */
+    position: fixed;              /* Lock to left side */
+    top: 80px;                    /* Below top navbar */
+    left: 0;
+    width: 200px;
+    background-color: #121212;
+    border-radius: 0 10px 10px 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.sidebar h2{
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #222;
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #15292B;
+}
+
+.challenge h1{
+    text-align: center;
+    color: white;
+}
+
 /* Responsive tweaks */
 @media (max-width: 500px) {
     .auth-form {
@@ -158,4 +220,9 @@ body {
     .auth-form .btn {
         font-size: 14px;
     }
+}
+
+.page-content {
+    margin-left: 220px;
+    padding: 20px;
 }
