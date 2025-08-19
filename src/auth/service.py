@@ -1,4 +1,6 @@
-from fastapi import Depends, HTTPException, status, Request
+from urllib.error import HTTPError
+
+from fastapi import Depends, HTTPException, status, Request, Cookie
 from fastapi.security import OAuth2
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.security.utils import get_authorization_scheme_param
@@ -13,6 +15,7 @@ from src.users.models import User
 from src import database
 
 import jwt
+from jose import JWTError
 from jwt.exceptions import InvalidTokenError
 
 import logging
@@ -32,6 +35,14 @@ JWT_SECRET_KEY = ("bb7552e7504f689d3448ccf89fd15a701d38f53c1cedfc6c242eb9553a0d8
                   "2fe54f3faeb0e37b9347928026c19a3b93adf79f250de858373334c68d8550c13a5501c6b59cfe54853a2511e4b1e0c8ba1f"
                   "adea2856c379561b9464a1b2a5d36002c225df7fe6db1e738c90de79fdc704c7302981ddbe92c6a25b9f562120e4655254c5"
                   "2535b3da421d")
+
+def get_token_from_cookie(request: Request):
+    token = request.cookies.get("access_token")
+    if not token:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    if token.startswith("Bearer "):
+        token = token[len("Bearer "):]
+    return token
 
 # Algorithm
 JWT_ALG = "HS256"
@@ -101,18 +112,18 @@ oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="token")
 
 def create_access_token(
         data: dict,
-        email = str
+        email: str
 ):
     """
     Given a dictionary of information (which should be user details)
     Create a JWT based token, and return it
     """
-    if data["audience"] == "Admin":
+    if data["audience"] == "admin":
         print("ADMIN2")
         to_encode = data.copy()
 
         unique_identifier = str(uuid.uuid4())
-        expiration = datetime.now() + timedelta(30*60)
+        expiration = datetime.now() + timedelta(minutes=30)
         issue_time = str(datetime.now())
 
 
@@ -126,12 +137,12 @@ def create_access_token(
             to_encode, JWT_SECRET_KEY, algorithm=JWT_ALG
         )
         return encoded_jwt
-    elif data["audience"] == "User":
+    elif data["audience"] == "user":
         print("USER2")
         to_encode = data.copy()
 
         unique_identifier = str(uuid.uuid4())
-        expiration = datetime.now() +timedelta(30*60)
+        expiration = datetime.now() +timedelta(minutes=30)
         issue_time = str(datetime.now())
 
         to_encode.update({"unique code": unique_identifier})
@@ -158,21 +169,14 @@ def decode_token(
         print("Empty Token")
         return None
 
-    #try:
-    payload = jwt.decode(
-        token, JWT_SECRET_KEY, algorithms=[JWT_ALG]
-    )
-    user_id: str = payload.get("subject", None)
-
-
-    #except InvalidTokenError as e:
-    #    return e
-    print("user id" , user_id)
-    restored_uuid = uuid.UUID(user_id)
-    the_user = session.get(models.User, restored_uuid)
-
-    return the_user
-
+    try:
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALG])
+        user_id: str = payload.get("subject", None)
+        if not user_id:
+            return None
+        return session.get(models.User, user_id)
+    except JWTError:
+        return None
 
 def validate_login(
         email: str,
@@ -212,38 +216,25 @@ def validate_login(
 
 
 async def get_user(
-        token: Annotated[str, Depends(oauth2_scheme)],
+        token: str = Depends(get_token_from_cookie),
         session: Session = Depends(database.get_session),
 ):
-    """
-    Return the current user. Or None if they don't exist
-    """
-    print("TOKEEN", token)
-    if not token:
-        return None
+    try:
+        print("TOKEN FROM COOKIE:", repr(token))
 
-    the_user = decode_token(token, session)
-    return the_user
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALG])
+        user_id = payload.get("subject")
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Invalid Token")
 
+        user = session.get(User, user_id)
+        if not user:
+            raise HTTPException(status_code=401, detail="User not found")
 
-async def get_auth_user(
-        token: Annotated[str, Depends(oauth2_scheme)],
-        session: Session = Depends(database.get_session),
-):
-    """
-    Return the current user,  Raise a Not Authenticated
-    Exception if the use does not exist
-    """
-
-    if not token:
-        raise HTTPException(301, "Not Authenticated")
-
-    the_user = decode_token(token, session)
-
-    if not the_user:
-        raise HTTPException(301, "Not Authenticated")
-
-    return the_user
+        return user
+    except JWTError as e:
+        print("JWT ERROR:", e)
+        raise HTTPException(status_code=401, detail="Invalid Token")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -259,7 +250,7 @@ def authenticate_user(database, username: str, password: str):
         return False
     return user
 
-def get_current_admin(current_user: User = Depends(get_auth_user)) -> User:
+def get_current_admin(current_user: User = Depends(get_user)) -> User:
     if not current_user.is_admin:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,

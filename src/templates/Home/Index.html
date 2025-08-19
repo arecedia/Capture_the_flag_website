@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="http://127.0.0.1:8000/static/CSS/Index.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
 <nav class="navbar">
     <ul>
-        <li><a href="http://127.0.0.1:8000/Challenges.html">Challenges</a></li>
-        <li><a href="http://127.0.0.1:8000/tutorials.html">Watch our tutorials!</a></li>
-        <li><a href="http://127.0.0.1:8000/Reviews.html">See the reviews!</a></li>
-        <li><a href="http://127.0.0.1:8000/login.html">Log in</a></li>
-        <li><a href="http://127.0.0.1:8000/signup.html">Register an Account</a></li>
+        <li><a href="/Challenges/">Challenges</a></li>
+        <li><a href="/Tutorials/">Watch our tutorials!</a></li>
+        <li><a href="/Reviews/">See the reviews!</a></li>
+        <li><a href="/Login/">Log in</a></li>
+        <li><a href="/Signup/">Register an Account</a></li>
     </ul>
 </nav>
 </body>

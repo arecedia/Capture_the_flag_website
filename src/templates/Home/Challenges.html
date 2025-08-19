@@ -3,30 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="http://127.0.0.1:8000/static/CSS/Challenges.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
-<nav class="navbar">
-    <ul>
-        <li><a href="http://127.0.0.1:8000/">Home</a></li>
-        <li><a href="http://127.0.0.1:8000/tutorials.html">Watch our tutorials!</a></li>
-        <li><a href="http://127.0.0.1:8000/Reviews.html">See the reviews!</a></li>
-        <li><a href="http://127.0.0.1:8000/login.html">Log in</a></li>
-        <li><a href="http://127.0.0.1:8000/signup.html">Register an Account</a></li>
-    </ul>
-</nav>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/Index/">Home</a></li>
+            <li><a href="/Tutorials/">Watch our tutorials!</a></li>
+            <li><a href="/Reviews/">See the reviews!</a></li>
+            <li><a href="/Login/">Log in</a></li>
+            <li><a href="/Signup/">Register an Account</a></li>
+        </ul>
+    </nav>
+    <div class="main-content">
+        <div class="page-wrapper">
 
-<nav class="challenge_bar">
-    <ul>
-        <li><a href="http://127.0.0.1:8000/Challenge_1.html">Challenge 1</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_2.html">Challenge 2</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_3.html">Challenge 3</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_4.html">Challenge 4</a></li>
-        <li><a href="http://127.0.0.1:8000/Challenge_5.html">Challenge 5</a></li>
-    </ul>
-</nav>
+            <!--Sidebar-->
+            <div class="sidebar" id="challenge_bar">
+                <h2>Challenges</h2>
+                <a href="/challenge/1">Challenge 1</a>
+                <a href="/challenge/2">Challenge 2</a>
+                <a href="/challenge/3">Challenge 3</a>
+                <a href="/challenge/4">Challenge 4</a>
+                <a href="/challenge/5">Challenge 5</a>
+            </div>
 
-
+            <div class="page-content">
+                <div class="form-container">
+                    <h3>Challenge 1</h3>
+                    Covers the utilisation of malicious privileges to escalate user to root.
+                    <h3>Challenge 2</h3>
+                    Covers the creation of a backdoor into the root user using a communication protocol.
+                    <h3>Challenge 3</h3>
+                    Covers misconfigured SUID bits to run commands as root.
+                    <h3>Challenge 4</h3>
+                    Covers the uploading of a malicious file to gain access to a server.
+                    <h3>Challenge 5</h3>
+                    Covers a misconfiguration of scheduled tasks to gain root access.
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="Challenge">
 
 </div>

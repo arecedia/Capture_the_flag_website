@@ -18,6 +18,30 @@ async def home(request: Request):
         context={}
     )
 
+@router.get("/Index/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("Home/Index.html", {"request": request})
+
+@router.get("/Challenges/", response_class=HTMLResponse)
+async def challenges(request: Request):
+    return templates.TemplateResponse("Home/Challenges.html", {"request": request})
+
+@router.get("/Reviews/", response_class=HTMLResponse)
+async def reviews(request: Request):
+    return templates.TemplateResponse("Home/Reviews.html", {"request": request})
+
+@router.get("/Tutorials/", response_class=HTMLResponse)
+async def tutorials(request: Request):
+    return templates.TemplateResponse("Home/Tutorials.html", {"request": request})
+
+@router.get("/Login/", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("Home/Login.html", {"request": request})
+
+@router.get("/Signup/", response_class=HTMLResponse)
+async def signup(request: Request):
+    return templates.TemplateResponse("Home/Signup.html", {"request": request})
+
 @router.get("/user.html", response_class=HTMLResponse)
 async def user_view(*,
                     request: Request,
@@ -56,49 +80,28 @@ async def challenges_view(request: Request):
         context = {}
     )
 
-@router.get("/Challenge_1.html", response_class=HTMLResponse)
+@router.get("/challenge/1", response_class=HTMLResponse)
 async def challenge_1_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Challenges/Challenge_1.html",
-        context = {}
-    )
+    return templates.TemplateResponse("Challenges/Challenge_1.html", {"request": request})
 
 
-@router.get("/Challenge_2.html", response_class=HTMLResponse)
+@router.get("/challenge/2", response_class=HTMLResponse)
 async def challenge_2_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Challenges/Challenge_2.html",
-        context = {}
-    )
+    return templates.TemplateResponse("Challenges/Challenge_2.html", {"request": request})
 
 
-@router.get("/Challenge_3.html", response_class=HTMLResponse)
+@router.get("/challenge/3", response_class=HTMLResponse)
 async def challenge_3_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Challenges/Challenge_3.html",
-        context = {}
-    )
+    return templates.TemplateResponse("Challenges/Challenge_3.html", {"request": request})
 
-
-@router.get("/Challenge_4.html", response_class=HTMLResponse)
+@router.get("/challenge/4", response_class=HTMLResponse)
 async def challenge_4_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Challenges/Challenge_4.html",
-        context = {}
-    )
+    return templates.TemplateResponse("Challenges/Challenge_4.html", {"request": request})
 
 
-@router.get("/Challenge_5.html", response_class=HTMLResponse)
+@router.get("/challenge/5", response_class=HTMLResponse)
 async def challenge_5_view(request: Request):
-    return templates.TemplateResponse(
-        request = request,
-        name = "Challenges/Challenge_5.html",
-        context = {}
-    )
+    return templates.TemplateResponse("Challenges/Challenge_5.html", {"request": request})
 
 @router.get("/tutorials.html", response_class=HTMLResponse)
 async def tutorial_view(request: Request):
@@ -108,7 +111,7 @@ async def tutorial_view(request: Request):
         context = {}
     )
 
-@router.get("/Tutorial_1.html", response_class=HTMLResponse)
+@router.get("/tutorial/1", response_class=HTMLResponse)
 async def tutorial_1_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -117,7 +120,7 @@ async def tutorial_1_view(request: Request):
     )
 
 
-@router.get("/Tutorial_2.html", response_class=HTMLResponse)
+@router.get("/tutorial/2", response_class=HTMLResponse)
 async def tutorial_2_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -126,7 +129,7 @@ async def tutorial_2_view(request: Request):
     )
 
 
-@router.get("/Tutorial_3.html", response_class=HTMLResponse)
+@router.get("/tutorial/3", response_class=HTMLResponse)
 async def tutorial_3_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -135,7 +138,7 @@ async def tutorial_3_view(request: Request):
     )
 
 
-@router.get("/Tutorial_4.html", response_class=HTMLResponse)
+@router.get("/tutorial/4", response_class=HTMLResponse)
 async def tutorial_4_view(request: Request):
     return templates.TemplateResponse(
         request = request,
@@ -144,7 +147,7 @@ async def tutorial_4_view(request: Request):
     )
 
 
-@router.get("/Tutorial_5.html", response_class=HTMLResponse)
+@router.get("/tutorial/5", response_class=HTMLResponse)
 async def tutorial_5_view(request: Request):
     return templates.TemplateResponse(
         request = request,

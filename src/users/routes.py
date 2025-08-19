@@ -14,7 +14,7 @@ from src.users import models
 from src.auth import service as auth_service
 from src.auth import routes as auth_routes
 
-from fastapi import APIRouter, Depends, Request, Form, HTTPException
+from fastapi import APIRouter, Depends, Request, Form, HTTPException, Cookie
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordRequestForm
@@ -25,9 +25,8 @@ templates = Jinja2Templates(directory="src/templates")
 
 @router.get("/current_user")
 async def get_current_user(
-        user: models.User = Depends(auth_service.get_user)
-):
-    return(user)
+        user: models.User = Depends(auth_service.get_user)):
+    return user
 
 @router.post("/login", response_class=JSONResponse)
 async def login_code(
@@ -57,7 +56,8 @@ async def login_code(
     session.commit()
 
     encoded_jwt = auth_service.create_access_token(
-        data={"audience": audience, "subject": result.id.hex}
+        data={"audience": audience, "subject": result.id},
+        email=result.email
     )
 
     response = JSONResponse(content={"success": True, "redirect_url": "http://127.0.0.1:8000"})
@@ -122,15 +122,6 @@ async def get_users(session: Session = Depends(database.get_session)):
     result = session.exec(qry).all()
     return result
 
-@router.get("/auth_user")
-async def get_auth_user(
-        user: models.User = Depends(auth_service.get_auth_user)
-):
-    """
-    Return the current User or None
-    """
-    return {"current_user": user}
-
 @router.get("/reviews")
 async def display_reviews(
         session: Session = Depends(database.get_session)
@@ -146,7 +137,7 @@ async def display_reviews(
 async def submit_flag(*,
                       session: Session = Depends(database.get_session),
                       request:Request,
-                      current_user: models.User = Depends(auth_service.get_auth_user)
+                      current_user: models.User = Depends(auth_service.get_user)
                       ):
     body = await request.json()
     flag = body.get("flag")

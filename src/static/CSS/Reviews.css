@@ -48,7 +48,7 @@ body {
     float: left ;
 }
 
-.tutorial_bar ul{
+.review_submission_bar ul{
     width: 140px;
     list-style-type: none;
     background-color: #121212;
@@ -59,11 +59,11 @@ body {
     overflow: hidden;
 }
 
-.tutorial_bar:hover{
+.review_submission_bar:hover{
     border-radius: 10px;
 }
 
-.tutorial_bar a{
+.review_submission_bar a{
     color: white;
     text-decoration: none;
     padding: 15px;
@@ -71,12 +71,12 @@ body {
     justify-content: center;
 }
 
-.tutorial_bar a:hover{
+.review_submission_bar a:hover{
     background-color: #15292B;
     padding: 15px;
 }
 
-.navbar-tutorial-1 {
+. {
     display: flex;
     justify-content: center;
     align-content: center;
