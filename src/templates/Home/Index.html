@@ -6,14 +6,37 @@
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
-<nav class="navbar">
-    <ul>
-        <li><a href="/Challenges/">Challenges</a></li>
-        <li><a href="/Tutorials/">Watch our tutorials!</a></li>
-        <li><a href="/Reviews/">See the reviews!</a></li>
-        <li><a href="/Login/">Log in</a></li>
-        <li><a href="/Signup/">Register an Account</a></li>
-    </ul>
-</nav>
+    <main>
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <p class="toggle-text">Toggle Dark/Light Mode</p>
+        </div>
+
+        <div class="Header">
+            <nav class="navbar">
+                <ul>
+                    {% if user %}
+                        <!-- Show Profile + Logout if logged in -->
+                        <li><a href="/Profile/">Profile</a></li>
+                        <li><a href="/api/Logout/">Logout</a></li>
+                        <li><a href="/Challenges/">Challenges</a></li>
+                        <li><a href="/Tutorials/">Watch our tutorials!</a></li>
+                        <li><a href="/Reviews/">See the reviews!</a></li>
+                    {% else %}
+                        <!-- Show Login/Register if NOT logged in -->
+                        <li><a href="/Login/">Log in</a></li>
+                        <li><a href="/Signup/">Register an Account</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <nav class="Profile">
+
+            </nav>
+        </div>
+    </main>
+    <script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
 </html>

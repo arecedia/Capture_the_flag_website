@@ -6,35 +6,45 @@
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
-<nav class="navbar">
-    <ul>
-        <li><a href="/Index/">Home</a></li>
-        <li><a href="/Challenges/">Challenges</a></li>
-        <li><a href="/Tutorials/">Watch our tutorials!</a></li>
-        <li><a href="/Reviews/">Read some reviews!</a></li>
-    </ul>
-</nav>
-<div class="main-content">
-    <div class="auth-form">
-        <h1>Login</h1>
-        <form id="loginForm" method="POST" action="#">
-            <div class="mb-3">
-                <label for="identifier"></label>
-                <input type="text" id="identifier" name="identifier" placeholder="email/username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password"></label>
-                <input type="password" id="password" name="password" placeholder="password" required>
-            </div>
+    <main>
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <p class="toggle-text">Toggle Dark/Light Mode</p>
+        </div>
 
-            <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/Index/">Home</a></li>
+            </ul>
+        </nav>
 
-            <div class="register-link">
-                <p>Don't have an account? <a href="/Signup/">Register Today!</a></p>
+        <div class="main-content">
+            <div class="auth-form">
+                <h1>Login</h1>
+                <form id="loginForm" method="POST" action="#">
+                    <div class="mb-3">
+                        <label for="identifier"></label>
+                        <input type="text" id="identifier" name="identifier" placeholder="email/username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password"></label>
+                        <input type="password" id="password" name="password" placeholder="password" required>
+                    </div>
+
+                    <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="/Signup/">Register Today!</a></p>
+                    </div>
+                    <button id="submitBtn" class="btn btn-primary" type="submit" >Submit</button>
+                </form>
             </div>
-            <button id="submitBtn" class="btn btn-primary" type="submit" >Submit</button>
-        </form>
-    </div>
-</div>
-<script src="http://127.0.0.1:8000/static/JavaScript/Home/Login.js"></script>
+        </div>
+    </main>
+    <script src="{{ url_for('static', path='JavaScript/Home/Login.js') }}"></script>
+    <script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
+</html>

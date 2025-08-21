@@ -42,7 +42,7 @@ def get_token_from_cookie(request: Request):
         raise HTTPException(status_code=401, detail="Not authenticated")
     if token.startswith("Bearer "):
         token = token[len("Bearer "):]
-    return token
+    return token.strip()
 
 # Algorithm
 JWT_ALG = "HS256"
@@ -220,12 +220,15 @@ async def get_user(
         session: Session = Depends(database.get_session),
 ):
     try:
-        print("TOKEN FROM COOKIE:", repr(token))
+        if isinstance(token, str):
+            token_bytes = token.encode('utf-8')
+        else:
+            token_bytes = token
 
-        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALG])
+        payload = jwt.decode(token_bytes, JWT_SECRET_KEY, algorithms=[JWT_ALG])
         user_id = payload.get("subject")
         if user_id is None:
-            raise HTTPException(status_code=401, detail="Invalid Token")
+            raise HTTPException(status_code=401, detail="Invalid Token (user_id is None)")
 
         user = session.get(User, user_id)
         if not user:
@@ -235,6 +238,28 @@ async def get_user(
     except JWTError as e:
         print("JWT ERROR:", e)
         raise HTTPException(status_code=401, detail="Invalid Token")
+
+async def optional_user(
+        token: Optional[str] = Depends(get_token_from_cookie),
+        session: Session = Depends(database.get_session),
+) -> Optional[User]:
+    if not token:
+        return None
+    try:
+        if isinstance(token, str):
+            token_bytes = token.encode('utf-8')
+        else:
+            token_bytes = token
+
+        payload = jwt.decode(token_bytes, JWT_SECRET_KEY, algorithms=[JWT_ALG])
+        user_id = payload.get("subject")
+        if not user_id:
+            return None
+
+        user = session.get(User, user_id)
+        return user
+    except JWTError:
+        return None
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

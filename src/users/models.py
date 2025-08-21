@@ -28,7 +28,7 @@ class User(SQLModel, table=True):
     is_active: bool = Field(default=True)
 
     profile_bio: Optional[str] = None
-    avatar_url: Optional[str] = None
+    profile_picture: str | None = None
     country: Optional[str] = None
 
     solved_challenges: List["ChallengeSolve"] = Relationship(back_populates="user")

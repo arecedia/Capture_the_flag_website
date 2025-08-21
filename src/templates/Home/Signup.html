@@ -2,45 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Signup page</title>
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
-<nav class="navbar">
-    <ul>
-        <li><a href="/Index/">Home</a></li>
-        <li><a href="/Challenges/">Challenges</a></li>
-        <li><a href="/Tutorials/">Watch our tutorials!</a></li>
-        <li><a href="/Reviews/">Read some reviews!</a></li>
-    </ul>
-</nav>
-<div class="main-content">
-    <form class="auth-form">
-        <h1>Signup</h1>
-        <form id="signupForm" method="POST">
-            <div class="mb-3">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username">
-            </div>
-            <div class="mb-3">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div class="mb-3">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password">
-            </div>
-            <div class="mb-3">
-                <label for="password_confirm">Confirm Password</label>
-                <input type="password" id="password_confirm" name="password_confirm">
-            </div>
-            <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
-            <div class="register-link">
-                <p>Have an account? <a href="/Login/">Log in!</a> </p>
-            </div>
-            <button id="submitBtn" class="btn btn-primary" type="submit">Submit</button>
-        </form>
-    </form>
-</div>
-<script src="http://127.0.0.1:8000/static/JavaScript/Home/Signup.js"></script>
+<main>
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <p class="toggle-text">Toggle Dark/Light Mode</p>
+    </div>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/Index/">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="auth-form">
+            <h1>Signup</h1>
+            <form id="signupForm" method="POST">
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="mb-3">
+                    <label for="password_confirm">Confirm Password</label>
+                    <input type="password" id="password_confirm" name="password_confirm">
+                </div>
+                <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+                <div class="register-link">
+                    <p>Have an account? <a href="/Login/">Log in!</a> </p>
+                </div>
+                <button id="submitBtn" class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+<script src="{{ url_for('static', path='JavaScript/Home/Signup.js') }}"></script>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>

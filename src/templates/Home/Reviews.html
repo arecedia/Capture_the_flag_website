@@ -6,31 +6,36 @@
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
+<main>
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <p class="toggle-text">Toggle Dark/Light Mode</p>
+    </div>
+
     <nav class="navbar">
         <ul>
             <li><a href="/Index/">Home</a></li>
             <li><a href="/Tutorials/">Watch our tutorials!</a></li>
             <li><a href="/Challenges/">Try our challenges!</a></li>
-            <li><a href="/Login/">Log in</a></li>
-            <li><a href="/Signup/">Register an Account</a></li>
+            <li><a href="/Profile/">Profile</a></li>
+            <li><a href="/api/Logout/">Logout</a></li>
         </ul>
     </nav>
 
-<div class="sidebar" id="sidebar">
-    <h1>Reviews</h1>
-    <a href="/Review-Submission/1">Review challenge 1!</a>
-    <a href="/Review-Submission/2">Review challenge 2!</a>
-    <a href="/Review-Submission/3">Review challenge 3!</a>
-    <a href="/Review-Submission/4">Review challenge 4!</a>
-    <a href="/Review-Submission/5">Review challenge 5!</a>
-
-</div>
-
-<main>
+    <div class="sidebar" id="sidebar">
+        <h2>Reviews</h2>
+        <a href="/Review-Submission/1">Review challenge 1!</a>
+        <a href="/Review-Submission/2">Review challenge 2!</a>
+        <a href="/Review-Submission/3">Review challenge 3!</a>
+        <a href="/Review-Submission/4">Review challenge 4!</a>
+        <a href="/Review-Submission/5">Review challenge 5!</a>
+    </div>
 
     <div id="review-container"></div>
-
-    <script src="http://127.0.0.1:8000/static/javascript/reviews.js"></script>
 </main>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
 </html>

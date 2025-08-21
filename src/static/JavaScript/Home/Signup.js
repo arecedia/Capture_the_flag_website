@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Handle errors
                 console.error("Error:", error);
                 feedbackMessage.textContent = "An error occurred. Please try again.";
-                feedbackmessage.style.color = "red";
+                feedbackMessage.style.color = "red";
             })
             .finally(() => {
                 submitBtn.disabled = false;

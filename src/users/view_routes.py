@@ -1,10 +1,13 @@
 import logging
 from sqlmodel import Session, select
+from typing import Optional
 from src import database
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from src.users import models
+
+import src.auth.service as auth_service
 
 log = logging.getLogger(__name__)
 router = APIRouter()
@@ -19,8 +22,11 @@ async def home(request: Request):
     )
 
 @router.get("/Index/", response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse("Home/Index.html", {"request": request})
+async def home(
+        request: Request,
+        user: Optional[models.User] = Depends(auth_service.optional_user)
+):
+    return templates.TemplateResponse("Home/Index.html", {"request": request, "user": user})
 
 @router.get("/Challenges/", response_class=HTMLResponse)
 async def challenges(request: Request):
@@ -41,6 +47,21 @@ async def login(request: Request):
 @router.get("/Signup/", response_class=HTMLResponse)
 async def signup(request: Request):
     return templates.TemplateResponse("Home/Signup.html", {"request": request})
+
+@router.get("/Profile", response_class=HTMLResponse)
+async def profile_page(
+        request: Request,
+        user: models.User = Depends(auth_service.get_user)
+):
+    return templates.TemplateResponse(
+        "Home/Profile.html",
+        {
+            "request": request,
+            "username": user.username,
+            "profile_picture": user.profile_picture,
+            "profile_bio": user.profile_bio
+        },
+    )
 
 @router.get("/user.html", response_class=HTMLResponse)
 async def user_view(*,

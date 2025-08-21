@@ -26,7 +26,11 @@ def create_app():
     from src.users import view_routes
     from src.users import admin_routes
 
+    UPLOAD_DIR = "static/uploads"
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+
     app.mount("/static", StaticFiles(directory="src/static"), name="static")
+    app.mount("/uploads", StaticFiles(directory="static/uploads"), name="uploads")
 
     app.include_router(user_routes.router, prefix="/api", tags=["users"])
     app.include_router(auth_routes.router, prefix="/api/auth", tags=["auth"])

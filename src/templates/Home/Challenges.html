@@ -6,15 +6,25 @@
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
+<main>
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <p class="toggle-text">Toggle Dark/Light Mode</p>
+    </div>
+
     <nav class="navbar">
         <ul>
             <li><a href="/Index/">Home</a></li>
             <li><a href="/Tutorials/">Watch our tutorials!</a></li>
             <li><a href="/Reviews/">See the reviews!</a></li>
-            <li><a href="/Login/">Log in</a></li>
-            <li><a href="/Signup/">Register an Account</a></li>
+            <li><a href="/Profile/">Profile</a></li>
+            <li><a href="/api/Logout/">Logout</a></li>
         </ul>
     </nav>
+
     <div class="main-content">
         <div class="page-wrapper">
 
@@ -29,23 +39,33 @@
             </div>
 
             <div class="page-content">
-                <div class="form-container">
-                    <h3>Challenge 1</h3>
-                    Covers the utilisation of malicious privileges to escalate user to root.
-                    <h3>Challenge 2</h3>
-                    Covers the creation of a backdoor into the root user using a communication protocol.
-                    <h3>Challenge 3</h3>
-                    Covers misconfigured SUID bits to run commands as root.
-                    <h3>Challenge 4</h3>
-                    Covers the uploading of a malicious file to gain access to a server.
-                    <h3>Challenge 5</h3>
-                    Covers a misconfiguration of scheduled tasks to gain root access.
+                <div class="challenges-card">
+                    <h2>Challenges Overview</h2>
+                    <div class="challenge-item">
+                        <h3>Challenge 1</h3>
+                        <p>Covers the utilisation of malicious privileges to escalate user to root.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Challenge 2</h3>
+                        <p>Covers the creation of a backdoor into the root user using a communication protocol.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Challenge 3</h3>
+                        <p>Covers misconfigured SUID bits to run commands as root.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Challenge 4</h3>
+                        <p>Covers the uploading of a malicious file to gain access to a server.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Challenge 5</h3>
+                        <p>Covers a misconfiguration of scheduled tasks to gain root access.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<div class="Challenge">
-
-</div>
+</main>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
 </html>

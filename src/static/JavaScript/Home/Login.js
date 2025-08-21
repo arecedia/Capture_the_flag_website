@@ -34,7 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.success) {
                     feedbackMessage.textContent = "Login Successful! Redirecting...";
                     feedbackMessage.style.color = "green";
-                    window.location.href = data.redirect_url || "http://127.0.0.1:8000"
+                    setTimeout(() => {
+                        window.location.href = data.redirect_url || "/Index/";
+                    }, 100);
                 } else {
                     feedbackMessage.textContent = data.message || "An error occurred. Please try again."
                     feedbackMessage.style.color = "red";

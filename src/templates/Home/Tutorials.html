@@ -6,13 +6,22 @@
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
+<main>
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <p class="toggle-text">Toggle Dark/Light Mode</p>
+    </div>
+
     <nav class="navbar">
         <ul>
             <li><a href="/Index/">Home</a></li>
             <li><a href="/Challenges/">Try our challenges!</a></li>
             <li><a href="/Reviews/">See the reviews!</a></li>
-            <li><a href="/Login/">Log in</a></li>
-            <li><a href="/Signup/">Register an Account</a></li>
+            <li><a href="/Profile/">Profile</a></li>
+            <li><a href="/api/Logout/">Logout</a></li>
         </ul>
     </nav>
 
@@ -30,11 +39,17 @@
             </div>
 
             <div class="page-content">
-                <h2>Overview</h2>
-                Each tutorial contains a link to a video which will help solve the respective challenge. A writeup for
-                each challenge may also join the link.
+                <div class="overview-card">
+                    <h2>Overview</h2>
+                    <p>
+                        Each tutorial contains a video walkthrough to help you solve the respective challenge.
+                        In addition, some challenges may also include a detailed write-up to deepen your understanding.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+</main>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
 </html>

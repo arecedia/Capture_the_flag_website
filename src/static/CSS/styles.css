@@ -5,21 +5,73 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+:root {
+    --text-primary: #1a1a1a;
+    --text-primary-rgb: 26,26,26;
+    --bg-secondary: #f0f2f5;
+    --bg-input: #ffffff;
+    --border-color: #b3b3b3;
+    --btn-bg: #0066cc;
+    --btn-hover-bg: #004999;
+    --btn-text: #ffffff;
+    --bg-navbar: #d9d9d9;
+}
+
+body.dark-mode {
+    --text-primary: #eaeaea;
+    --text-primary-rgb:234,234,234;
+    --bg-secondary: #1a1a1a;
+    --bg-input: #2a2a2a;
+    --border-color: #555555;
+    --btn-bg: #3a7bfd;
+    --btn-hover-bg: #2a5cc7;
+    --btn-text: #ffffff;
+    --bg-navbar: #242424;
+}
+
+body.light-mode {
+    --text-primary: #1a1a1a;
+    --text-primary-rgb: 26,26,26;
+    --bg-secondary: #f0f2f5;
+    --bg-input: #ffffff;
+    --border-color: #b3b3b3;
+    --btn-bg: #0066cc;
+    --btn-hover-bg: #004999;
+    --btn-text: #ffffff;
+    --bg-navbar: #d9d9d9;
+}
+
 body {
-    background-color: #181818;
-    color: #f0f0f0;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-size: 16px;
+    transition: background-color 0.6s ease, color 0.6s ease;
 }
 
-/*Title bar*/
+body,
+.navbar ul,
+.sidebar,
+.auth-form,
+.workspace-box,
+.challenge-form,
+.auth-form input,
+.challenge-form input,
+.challenge-form textarea {
+    transition: background-color 0.6s ease,
+    color 0.6s ease,
+    border-color 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+/* Title */
 .title {
     text-align: center;
     font-size: 28px;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 20px 0;
     padding: 10px 0;
 }
@@ -30,7 +82,7 @@ body {
 .navbar_reviews {
     display: flex;
     justify-content: center;
-    position: relative
+    position: relative;
 }
 
 .navbar ul,
@@ -41,11 +93,12 @@ body {
     justify-content: center;
     align-items: center;
     list-style-type: none;
-    background-color: #121212;
+    background-color: var(--bg-navbar);
     padding: 0;
     margin: 0;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .navbar a,
@@ -53,7 +106,7 @@ body {
 .navbar_tutorials a,
 .navbar_reviews a {
     display: block;
-    color: white;
+    color: var(--text-primary);
     text-decoration: none;
     padding: 15px 20px;
     white-space: nowrap;
@@ -63,143 +116,50 @@ body {
 .navbar_challenges a:hover,
 .navbar_tutorials a:hover,
 .navbar_reviews a:hover {
-    background-color: #15292B;
+    background-color: var(--btn-bg);
 }
 
-/* Main content wrapper */
-.main-content {
+/* Main content */
+.main-content, .page-wrapper {
     flex: 1;
     width: 100%;
-    min-height: calc(100vh - 80px); /* adjust if navbar height is different */
-
-}
-
-.page-wrapper {
-    display: flex;
     min-height: calc(100vh - 80px);
-}
-
-/* Forms */
-.auth-form {
-    width: 420px;
-    max-width: 90%;
-    background-color: #121212;
-    color: #ffffff;
-    border-radius: 10px;
-    padding: 40px 30px;
-    text-align: center;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-.auth-form h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-/* Input fields */
-.auth-form .mb-3 {
-    position: relative;
-    width: 100%;
-    height: 50px;
-}
-
-.mb-3 input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    font-size: 16px;
-    color: white;
-    padding: 0 45px 0 20px;
-}
-
-.mb-3 input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.mb-3 i {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-}
-
-/* Buttons */
-.auth-form .btn {
-    width: 100%;
-    height: 45px;
-    background: white;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #121212;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.auth-form .btn:hover {
-    background-color: #00bfff;
-    color: white;
-}
-
-/* Links below form */
-.auth-form .register-link {
-    font-size: 14.5px;
-}
-
-.register-link a {
-    color: deepskyblue;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.register-link a:hover {
-    text-decoration: underline;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar {
     display: flex;
-    flex-direction: column;       /* Stack links vertically */
-    align-items: stretch;         /* Links fill the width */
-    position: fixed;              /* Lock to left side */
-    top: 50%;                    /* Below top navbar */
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: 50%;
     left: 0;
     transform: translateY(-50%);
     width: 200px;
-    background-color: #121212;
+    background-color: var(--bg-secondary);
     border-radius: 0 10px 10px 0;
     overflow: hidden;
-    padding: 0;
-    margin: 0;
     box-shadow: 4px 0 10px rgba(0,0,0,0.5);
     z-index: 999;
 }
 
 .sidebar h2{
-    color: #fff;
+    color: var(--text-primary);
     padding: 15px 20px;
-    border-bottom: 1px solid #222;
-    margin: 0;
-    font-size: 18px;
+    border-bottom: 1px solid var(--border-color);
     text-align: center;
+    font-size: 18px;
 }
 
 .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    list-style: none;
 }
 
 .sidebar a {
     display: block;
-    color: white;
+    color: var(--text-primary);
     text-decoration: none;
     padding: 15px 20px;
     white-space: nowrap;
@@ -207,12 +167,7 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #15292B;
-}
-
-.challenge h1{
-    text-align: center;
-    color: white;
+    background-color: var(--btn-hover-bg);
 }
 
 .page-content {
@@ -223,80 +178,76 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    box-sizing: border-box;
 }
 
-/* Workspace placeholder */
-.workspace-box {
-    width: 90%;
-    max-width: 900px;
-    min-height: 400px;
-    background-color: #121212;
+/* Forms */
+.auth-form, .challenge-form {
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-}
-
-/* Challenge Form Styling */
-.challenge-form {
-    width: 100%;
-    max-width: 500px;
-    padding: 30px;
-    background-color: #1a1a1a;
-    color: #ffffff;
-    border-radius: 10px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
 }
 
-/* Headings inside challenge form */
-.challenge-form h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.auth-form {
+    width: 420px;
+    max-width: 90%;
     text-align: center;
 }
 
-/* Input Fields */
-.challenge-form input,
-.challenge-form textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    color: #ffffff;
-    font-size: 16px;
-    outline: none;
-    transition: border 0.3s;
-}
-
-.challenge-form input:focus,
-.challenge-form textarea:focus {
-    border-color: deepskyblue;
-}
-
-.input_flag {
+.auth-form h1 {
+    text-align: center;
     margin-bottom: 20px;
+    color: var(--text-primary);
 }
 
-.input_flag input{
+.mb-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mb-3 label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Inputs */
+.mb-3, .input_flag {
+    position: relative;
     width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.mb-3 input, .input_flag input, .challenge-form input, .challenge-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
     font-size: 16px;
-    outline: none;
+    box-sizing: border-box;
     transition: border 0.3s;
 }
 
-.input_flag input:focus {
-    border-color: deepskyblue;
+.mb-3 input::placeholder {
+    color: rgba(var(--text-primary-rgb), 0.7);
+}
+
+.mb-3 i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
 }
 
 .challenge-form textarea {
@@ -304,21 +255,327 @@ body {
     resize: vertical;
 }
 
-.challenge-form .btn {
-    padding: 12px;
-    background-color: white;
-    color: #121212;
-    font-weight: 600;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: 0.3s;
-    text-align: center;
+.mb-3 input:focus, .challenge-form input:focus, .challenge-form textarea:focus, .input_flag input:focus {
+    outline: none;
+    border-color: var(--btn-bg);
+    box-shadow: 0 0 0 2px rgba(58, 123, 253, 0.2);
 }
 
-.challenge-form .btn:hover {
-    background-color: deepskyblue;
+/* Buttons */
+.auth-form .btn, .challenge-form .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.auth-form .btn:hover, .challenge-form .btn:hover {
+    background-color: var(--btn-hover-bg);
     color: white;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-link a {
+    color: var(--btn-bg);
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Workspace */
+.workspace-box {
+    width: 90%;
+    max-width: 900px;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Toggle Switch */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px;
+    justify-content: center;
+}
+
+.toggle-text {
+    font-size: 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--border-color);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.switch input:checked + .slider {
+    background-color: var(--border-color);
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Cards */
+.overview-card, .challenges-card {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+    transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+}
+
+.overview-card h2, .challenges-card h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: deepskyblue;
+}
+
+.challenge-item {
+    background-color: var(--bg-input);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.challenge-item h3 {
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: var(--btn-bg);
+}
+
+.challenge-item p {
+    font-size: 15px;
+    color: var(--text-primary);
+}
+
+.challenge-item:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+/* Profile */
+.profile-container, .profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.profile-pic {
+    width: 120px;          /* smaller, professional size */
+    height: 120px;         /* keeps it square before rounding */
+    border-radius: 50%;    /* perfect circle */
+    object-fit: cover;     /* crop to fit inside circle */
+    display: block;        /* removes inline weirdness */
+    margin: 15px auto;     /* centers image horizontally */
+    border: 2px solid var(--border-color); /* optional: clean border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* subtle depth */
+}
+
+.edit-profile-btn {
+    margin-top: 15px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.edit-profile-btn:hover {
+    background-color: var(--btn-hover-bg);
+    transform: translateY(-2px);
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* overlay */
+    transition: background-color 0.3s ease;
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    animation: modalFadeIn 0.4s;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    font-size: 22px;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: var(--btn-bg);
+}
+
+.modal-body {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-footer .btn {
+    padding: 10px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-footer .btn:hover {
+    background-color: var(--btn-hover-bg);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--text-primary);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: var(--btn-hover-bg);
+}
+
+#edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#edit-profile-form input[type="text"],
+#edit-profile-form textarea,
+#edit-profile-form input[type="file"] {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, #ccc);
+    background-color: var(--bg-input, #fff);
+    color: var(--text-primary, #333);
+    transition: all 0.3s;
+}
+
+#edit-profile-form button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    background-color: var(--btn-bg, #007bff);
+    color: var(--btn-text, #fff);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#edit-profile-form button:hover {
+    background-color: var(--btn-hover-bg, #0056b3);
+}
+
+
+/* Modal Animation */
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Responsive tweaks */
@@ -334,11 +591,12 @@ body {
 
     .mb-3 input {
         font-size: 14px;
-        padding: 0 40px 0 15px;
+        padding: 8px 12px;
     }
 
     .auth-form .btn {
         font-size: 14px;
+        padding: 10px;
     }
 }
 

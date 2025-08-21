@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
+</head>
+<body>
+<main>
+  <div class="toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider"></span>
+    </label>
+    <p class="toggle-text">Toggle Dark/Light Mode</p>
+  </div>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="/Index/">Home</a></li>
+      <li><a href="/Challenges/">Challenges</a></li>
+      <li><a href="/Tutorials/">Tutorials</a></li>
+      <li><a href="/Reviews/">Reviews</a></li>
+      <li><a href="/api/Logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Profile Section -->
+  <div class="main-content">
+    <div class="profile-container">
+      <h2 id="username-display">{{ username }}'s Profile</h2>
+
+      {% if profile_picture %}
+      <img src="{{ url_for('uploads', path=profile_picture) }}"
+           alt="Profile Picture"
+           class="profile-pic">
+      {% else %}
+      <p>No profile picture uploaded.</p>
+      {% endif %}
+
+      <p id="bio-display">
+        {{ profile_bio or "No bio yet." }}
+      </p>
+
+      <!-- Edit Profile Button -->
+      <button class="edit-profile-btn" id="edit-profile-btn">Edit Profile</button>
+    </div>
+  </div>
+</main>
+
+<div id="edit-profile-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal" class="close">&times;</span>
+    <h3>Edit Profile</h3>
+    <form id="edit-profile-form" action="/api/Profile/edit/" method="post" enctype="multipart/form-data">
+      <label for="file-input">Change Profile Picture:</label>
+      <input type="file" name="file" id="file-input" accept="image/*">
+
+      <label for="username-input">Change Username:</label>
+      <input type="text" name="new_username" id="username-input" placeholder="{{ username }}">
+
+      <label for="bio-input">Edit Bio:</label>
+
+      <textarea name="new_bio" id="bio-input" placeholder="{{ profile_bio or '' }}"></textarea>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+<script src="{{ url_for('static', path='JavaScript/Home/Edit_Profile_toggle.js') }}"></script>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
+</body>
+</html>
