@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Challenge 4</title>
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
+<main>
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <p class="toggle-text">Toggle Dark/Light Mode</p>
+    </div>
+
     <nav class="navbar_challenges">
         <ul>
             <li><a href="/Index/">Home</a></li>
             <li><a href="/Tutorials/">Tutorials</a></li>
             <li><a href="/Challenges/">Challenges</a></li>
-            <li><a href="/Tutorials/2">Stuck?</a></li>
-            <li><a href="/Review-Submission/2">Want to leave a review?</a></li>
+            <li><a href="/tutorial/4">Stuck?</a></li>
+            <li><a href="/Review-Submission/4">Want to leave a review?</a></li>
             <li><a href="/Reviews/">Want to see reviews?</a></li>
         </ul>
     </nav>
@@ -43,6 +52,8 @@
             </div>
         </div>
     </div>
-<script src="http://127.0.0.1:8000/static/JavaScript/Challenges/Challenge_4.js"></script>
+</main>
+<script src="{{ url_for('static', path='JavaScript/Challenges/Challenge_4.js') }}"></script>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
 </html>

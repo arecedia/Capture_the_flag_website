@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Challenge 5</title>
     <link rel="stylesheet" href="{{ url_for('static', path='CSS/styles.css') }}">
 </head>
 <body>
+<main>
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <p class="toggle-text">Toggle Dark/Light Mode</p>
+    </div>
+
     <nav class="navbar_challenges">
         <ul>
             <li><a href="/Index/">Home</a></li>
             <li><a href="/Tutorials/">Tutorials</a></li>
             <li><a href="/Challenges/">Challenges</a></li>
-            <li><a href="/Tutorials/2">Stuck?</a></li>
-            <li><a href="/Review-Submission/2">Want to leave a review?</a></li>
+            <li><a href="/tutorial/5">Stuck?</a></li>
+            <li><a href="/Review-Submission/5">Want to leave a review?</a></li>
             <li><a href="/Reviews/">Want to see reviews?</a></li>
         </ul>
     </nav>
@@ -31,19 +40,21 @@
             <a href="/challenge/5">Challenge 5</a>
         </nav>
 
-    <div class="page-content">
-        <div class="workspace-box">
-            <form class="challenge-form" id="challengeForm" method="post">
-                <div class="input_flag">
-                    <label for="flag_5"></label>
-                    <input type="text" id="flag_5" name="flag_5" placeholder="Input flag found">
-                </div>
-                <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
+        <div class="page-content">
+            <div class="workspace-box">
+                <form class="challenge-form" id="challengeForm" method="post">
+                    <div class="input_flag">
+                        <label for="flag_5"></label>
+                        <input type="text" id="flag_5" name="flag_5" placeholder="Input flag found">
+                    </div>
+                    <div id="feedbackMessage" style="color:red; margin-top: 10px;"></div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<script src="http://127.0.0.1:8000/static/JavaScript/Challenges/Challenge_5.js"></script>
+</main>
+<script src="{{ url_for('static', path='JavaScript/Challenges/Challenge_4.js') }}"></script>
+<script src="{{ url_for('static', path='JavaScript/Home/Dark_Light_toggle.js') }}"></script>
 </body>
 </html>
